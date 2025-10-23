@@ -27,8 +27,12 @@ describe Datev::StringField do
         expect(subject.output('foo')).to eq('"foo"')
       end
 
-      it "should quote nil value" do
-        expect(subject.output(nil)).to eq('""')
+      it "should return empty string for nil value (DATEV reserved fields requirement)" do
+        expect(subject.output(nil)).to eq('')
+      end
+
+      it "should return empty string for empty string value" do
+        expect(subject.output('')).to eq('')
       end
 
       it "should handle single quotes" do

@@ -365,5 +365,44 @@ module Datev
     # 120
     field 'Land', :string, limit: 2
     # Beispiel: DE für Deutschland
+
+    # 121
+    field 'Abrechnungsreferent', :string, limit: 50
+    # Die Abrechnungsreferenz stellt eine Klammer über alle Transaktionen 
+    # des Zahlungsdienstleisters und die dazu gehörige Auszahlung dar. 
+    # Sie wird über den Zahlungsdatenservice bereitgestellt und bei der 
+    # Erzeugung von Buchungsvorschläge berücksichtigt.
+
+    # 122
+    field 'BVV-Position', :integer, limit: 1
+    # Betriebsvermögensvergleich
+    # 1 Kapitalanpassung
+    # 2 Entnahme / Ausschüttung lfd. WJ
+    # 3 Einlage / Kapitalzuführung lfd. WJ
+    # 4 Übertragung § 6b Rücklage
+    # 5 Umbuchung (keine Zuordnung)
+
+    # 123
+    field 'EU-Mitgliedstaat u. UStID (Ursprung)', :string, limit: 15
+    # Die USt-IdNr. besteht aus
+    # - 2-stelligen Länderkürzel (siehe Dok.-Nr. 1080169)
+    # Ausnahme Griechenland: Das Länderkürzel lautet EL)
+    # - 13-stelliger USt-IdNr.
+    # - Beispiel: DE133546770. Die USt-IdNr kann auch Buchstaben haben, z.B.: bei Österreich
+    # Detaillierte Informationen zur Erfassung von EU-Informationen im Buchungssatz: Dok.-Nr: 9211462
+
+    # 124
+    field 'EU-Steuersatz (Ursprung)', :decimal, precision: 4, scale: 2
+    # Nur für entsprechende EU-Buchungen:
+    # Der im EU-Ursprungsland gültige Steuersatz.
+    # Beispiel: 12,12
+
+    # 125
+    field 'Abw. Skontokonto', :integer, limit: 8
+    # Zulässig sind hier, bei Zahlungsbuchungen mit Skontoabzug, Konten mit dem Kontenzweck „sonstige betriebliche Aufwendungen“. 
+    # Eine Eingabe in diesem Feld bedeutet, dass der Skontobetrag auf dieses Aufwandskonto gebucht wird.
+    # Wenn in der Importdatei keine Angaben zum Skontokonto enthalten sind, wird der Skontobetrag auf das entsprechende Skontosammelkonto gebucht.
+    
+    
   end
 end
