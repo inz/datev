@@ -24,7 +24,11 @@ module Datev
     end
 
     def output(value, _context=nil)
-      value.to_s if value
+      # Return empty string for nil values (required for DATEV reserved fields)
+      return '' if value.nil?
+
+      # Return bare integer value without quotes (DATEV CSV format requirement)
+      value.to_s
     end
   end
 end

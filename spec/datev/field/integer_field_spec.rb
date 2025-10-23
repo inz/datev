@@ -29,8 +29,14 @@ describe Datev::IntegerField do
   end
 
   describe :output do
-    it "should return value as string" do
+    it "should return value as unquoted string (DATEV CSV format requirement)" do
       expect(subject.output(1)).to eq('1')
+      expect(subject.output(700)).to eq('700')
+      expect(subject.output(42)).to eq('42')
+    end
+
+    it "should return empty string for nil value (DATEV reserved fields requirement)" do
+      expect(subject.output(nil)).to eq('')
     end
   end
 end
