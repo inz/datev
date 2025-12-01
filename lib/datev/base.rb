@@ -64,7 +64,7 @@ module Datev
       @attributes[field.name]
     end
 
-    def output(context=nil)
+    def output(context=self)
       self.class.fields.map do |field|
         value = @attributes[field.name]
         field.output(value, context)

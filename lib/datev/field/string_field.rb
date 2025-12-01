@@ -18,10 +18,12 @@ module Datev
       end
     end
 
-    def output(value, _context=nil)
-      # If value is nil or empty, return empty string (no quotes)
-      # This is required for DATEV's reserved fields which MUST be completely empty
-      return '' if value.nil? || (value.respond_to?(:empty?) && value.empty?)
+    def output(value, context = self)
+      unless context&.respond_to?(:quote_empty_strings) && context.quote_empty_strings
+        # If value is nil or empty, return empty string (no quotes)
+        # This is required for DATEV's reserved fields which MUST be completely empty
+        return '' if value.nil? || (value.respond_to?(:empty?) && value.empty?)
+      end
 
       # Original behavior for non-empty values
       value = value.slice(0, limit || 255) if value

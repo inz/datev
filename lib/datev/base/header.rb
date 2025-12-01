@@ -1,5 +1,7 @@
 module Datev
   class Header < Base
+    attr_accessor :quote_empty_strings
+
     # 1
     field 'DATEV-Format-KZ', :string, limit: 4
     # vom Datev angegeben
